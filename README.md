@@ -1,4 +1,4 @@
-## Using AI Assitant for Code Reviews
+## POC: Using AI Assitant for Code Reviews
 
 
 Original Project: https://github.com/themesberg/volt-react-dashboard
