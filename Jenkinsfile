@@ -1,9 +1,12 @@
 pipeline {
     agent any
 
-    triggers {
-        pipelineTriggers([
-            [$class: 'GitHubPRTrigger', onlyTriggerPhrase: false]
+    // ✅ Correct way to add PR trigger
+    options {
+        properties([
+            pipelineTriggers([
+                [$class: 'GitHubPRTrigger', onlyTriggerPhrase: false]
+            ])
         ])
     }
 
