@@ -1,13 +1,12 @@
 pipeline {
     agent any
 
-    // ✅ Correct way to add PR trigger
-    options {
-        properties([
-            pipelineTriggers([
-                [$class: 'GitHubPRTrigger', onlyTriggerPhrase: false]
-            ])
-        ])
+    triggers {
+        githubPullRequest(
+            cron: 'H/5 * * * *', // Checks for PR updates every 5 minutes
+            onlyTriggerPhrase: false, // ✅ Automatically triggers on every PR
+            useGitHubHooks: true // ✅ Uses GitHub Webhook for instant triggering
+        )
     }
 
     stages {
