@@ -2,17 +2,18 @@ pipeline {
     agent any
 
     triggers {
-        githubPullRequest(
-            cron: 'H/5 * * * *', // Checks for PR updates every 5 minutes
-            onlyTriggerPhrase: false, // ✅ Automatically triggers on every PR
-            useGitHubHooks: true // ✅ Uses GitHub Webhook for instant triggering
-        )
+        // 🚀 GitHub Webhook handles PR triggers, no need for pollSCM
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                checkout scm
+                script {
+                    if (env.CHANGE_ID) { // ✅ Runs only on PRs in a Multibranch Pipeline
+                        echo "Triggered by Pull Request #${env.CHANGE_ID}"
+                    }
+                    checkout scm
+                }
             }
         }
 
@@ -27,10 +28,10 @@ pipeline {
 
     post {
         success {
-            echo "PR Passed Static Analysis ✅"
+            echo "✅ PR Passed Static Analysis"
         }
         failure {
-            echo "PR Failed Static Analysis ❌"
+            echo "❌ PR Failed Static Analysis"
         }
     }
 }
