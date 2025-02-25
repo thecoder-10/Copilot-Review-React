@@ -28,7 +28,13 @@ pipeline {
                         	def jsonPayload = groovy.json.JsonOutput.toJson([body: REVIEW])
 
                         	// Post the review comment to the GitHub PR
-                        	sh "curl -H "Authorization: token ${GH_TOKEN}" -H "Content-Type: application/json" -X POST -d '${jsonPayload}' '${PR_COMMENTS_URL}'"
+                        	sh """
+    curl -H "Authorization: token ${GH_TOKEN}" \
+         -H "Content-Type: application/json" \
+         -X POST -d '${jsonPayload}' \
+         '${PR_COMMENTS_URL}'
+"""
+
 
                 	}
                 	}
