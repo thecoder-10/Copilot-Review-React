@@ -1,0 +1,98 @@
+# Codrabbit AI configuration file
+
+# Define the rules for code review
+rules:
+  - name: "Check for TODO comments"
+    description: "Ensure that all TODO comments have a corresponding issue."
+    pattern: "TODO"
+    action: "error"
+
+  - name: "Check for console.log statements"
+    description: "Ensure that no console.log statements are present in the code."
+    pattern: "console.log"
+    action: "warning"
+
+  - name: "Check for debugger statements"
+    description: "Ensure that no debugger statements are present in the code."
+    pattern: "debugger"
+    action: "error"
+
+  - name: "Check for trailing whitespace"
+    description: "Ensure that there are no trailing whitespace characters in the code."
+    pattern: "\\s+$"
+    action: "warning"
+    regex: true
+
+  - name: "Check for proper indentation"
+    description: "Ensure that code is properly indented with 2 spaces."
+    pattern: "^( {2})+[^\\s]"
+    action: "error"
+    regex: true
+
+  - name: "Check for function length"
+    description: "Ensure that functions do not exceed 50 lines."
+    pattern: "^function\\s+\\w+\\s*\\([^)]*\\)\\s*{([^}]*\\n){49}"
+    action: "warning"
+    regex: true
+
+  - name: "Check for React component naming"
+    description: "Ensure that React component names are in PascalCase."
+    pattern: "^[A-Z][a-zA-Z0-9]*$"
+    action: "error"
+    regex: true
+
+  - name: "Check for unused imports"
+    description: "Ensure that there are no unused imports in the code."
+    pattern: "import\\s+\\w+"
+    action: "warning"
+
+  - name: "Check for prop-types definitions"
+    description: "Ensure that all React components have prop-types defined."
+    pattern: "propTypes\\s*=\\s*{"
+    action: "error"
+
+# Define the pull request review settings
+pull_request_review:
+  enabled: true
+  reviewers:
+    - thecoder-10
+  required_approvals: 1
+  request_reviewers: true
+  review_comments: true
+
+# Define the commit message rules
+commit_message_rules:
+  - name: "Check for issue reference"
+    description: "Ensure that commit messages reference an issue."
+    pattern: "#\\d+"
+    action: "error"
+    regex: true
+
+  - name: "Check for commit message length"
+    description: "Ensure that commit messages do not exceed 72 characters."
+    pattern: "^.{73,}$"
+    action: "warning"
+    regex: true
+
+# Define the branch naming rules
+branch_naming_rules:
+  - name: "Check for Jira ticket reference"
+    description: "Ensure that branch names reference a Jira ticket."
+    pattern: "^[A-Z]+-\\d+"
+    action: "error"
+    regex: true
+
+# Define the file naming rules
+file_naming_rules:
+  - name: "Check for lowercase filenames"
+    description: "Ensure that filenames are in lowercase."
+    pattern: "^[a-z0-9_]+$"
+    action: "warning"
+    regex: true
+
+# Define the code complexity rules
+code_complexity_rules:
+  - name: "Check for cyclomatic complexity"
+    description: "Ensure that cyclomatic complexity of functions does not exceed 10."
+    threshold: 10
+    action: "warning"
