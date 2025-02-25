@@ -14,7 +14,7 @@ pipeline {
                     	$class: 'GitSCM',
                     	branches: [[name: '*/main']], // Specify branch if needed
                     	userRemoteConfigs: [[
-                        	url: '' //Replace with your own repository URL
+                        	url: 'https://github.com/thecoder-10/Copilot-Review-React' //Replace with your own repository URL
                     	]]
                 	])
 
